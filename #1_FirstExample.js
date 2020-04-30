@@ -1,6 +1,6 @@
 function onResult(results, output) {
-    //Prefix <STX>=\x02
-    var prefix = "\x02";
+    
+    var prefix = "\x02";                      //Prefix <STX>=\x02
     var suffix = "";
     
     //If code found within reading phase
