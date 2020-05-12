@@ -6,5 +6,5 @@
 ### #3_CollectAllCodes.js
 > Iterate through codes object and find all codes and which slave device it was scanned on
 ### #4_AddAIMID.js
-> Iterate through all codes, if symbology is CODE128, also add aimID to output message
+> Iterate through all codes, if symbology is CODE128, also add aimID to output message<br>
 ![#4_AddAIMID_img](https://raw.githubusercontent.com/joeraven0/DLA_DL.Code_Scripts/master/assets/%234.png)
