@@ -8,3 +8,9 @@
 ### #4_AddAIMID.js
 > Iterate through all codes, if symbology is CODE128, also add aimID (]C0) to output message<br>
 ![#4_AddAIMID_img](https://raw.githubusercontent.com/joeraven0/DLA_DL.Code_Scripts/master/assets/%234.png)
+### #5_ReplaceChar.js
+> Read two barcodes and replace all GS with # and add GS between both barcodes.
+* Read two barcodes
+* Replace all <GS> with #
+* Sort array order, barcode "240" always first in array, then "0037"
+* Add GS between barcodes
