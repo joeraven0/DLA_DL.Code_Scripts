@@ -14,3 +14,4 @@
 * Replace all <GS> with #
 * Sort array order, barcode "240" always first in array, then "0037"
 * Add GS between barcodes
+  ![#5_ReplaceChar_img](https://raw.githubusercontent.com/joeraven0/DLA_DL.Code_Scripts/master/assets/%234.png)
