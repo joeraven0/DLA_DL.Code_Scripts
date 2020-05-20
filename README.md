@@ -11,7 +11,7 @@
 ### #5_ReplaceChar.js
 > Read two barcodes and replace all GS with # and add GS between both barcodes.
 * Read two barcodes
-* Replace all <GS> with #
+* Replace all [GS] with #
 * Sort array order, barcode "240" always first in array, then "0037"
 * Add GS between barcodes<br>
 ![#5_ReplaceChar_img](https://raw.githubusercontent.com/joeraven0/DLA_DL.Code_Scripts/master/assets/%235.png)
