@@ -1,21 +1,32 @@
-	var NoReadMessage = "NoRead"; 						//global no read string
- 	var sequenceToReplace = "\x1d"; 					//char to be replaced
-	var replaceWith = "#";								//with following char
-	var regexp = new RegExp(sequenceToReplace, "g");	//use "i" instead of "g" for case-insensitive match
+	/*******************************************************************************/
+	/*                                                                             */
+	/*   DATALOGIC SAMPLE SCRIPTING ENGINE CODE                                    */
+	/*                                                                             */	
+	/*   Example for Search and Replacement of barcode content                     */
+	/*                                                                             */
+	/*******************************************************************************/
+
+	var NoReadMessage = "NoRead"; 	//place your global no read string here
+ 	var GoodReadMessage = ''; 		//will be filled by script code
+ 	
+ 	//place your target undesired sequence here in RegExp format
+ 	var sequenceToReplace = "\x1d"; // ascii char <GS>
+ 	
+ 	//place replacement text sequence here
+	var replaceWith = "";
+	
+	//use "i" instead of "g" for case-insensitive match
+	var regexp = new RegExp(sequenceToReplace, "g"); 
 	
 	function onResult(result, output) {
-	 	var msg = [""];
-	   if (!result.success) {							//If bad read
+	   if (!result.success) {
 	       output.setMessage(NoReadMessage);
 	       return;
 	   }
-	   
-	   result.codes.forEach(function(code) {		
-	       msg.push(code.content.replace(regexp, replaceWith));
+	   GoodReadMessage = "";
+	   result.codes.forEach(function(code) {
+	       GoodReadMessage += code.content.replace(regexp, replaceWith);
 	   }); 
 	   
-	   msg.sort();										//240 first
-	   msg.reverse();
-	   var outputmsg = "\x02"+msg[0]+"\x1d"+msg[1]+"\x03";
-	   output.setMessage(outputmsg);
+	   output.setMessage("*"+(GoodReadMessage ? GoodReadMessage : NoReadMessage)+"*");
 	}
