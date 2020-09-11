@@ -1,32 +1,21 @@
-	/*******************************************************************************/
-	/*                                                                             */
-	/*   DATALOGIC SAMPLE SCRIPTING ENGINE CODE                                    */
-	/*                                                                             */	
-	/*   Example for Search and Replacement of barcode content                     */
-	/*                                                                             */
-	/*******************************************************************************/
 
-	var NoReadMessage = "NoRead"; 	//place your global no read string here
- 	var GoodReadMessage = ''; 		//will be filled by script code
- 	
- 	//place your target undesired sequence here in RegExp format
- 	var sequenceToReplace = "\x1d"; // ascii char <GS>
- 	
- 	//place replacement text sequence here
-	var replaceWith = "";
+function onResult(results, output)
+{
+	var aimId,codeContent,outputMessage; 
+
+	var stringToReplace = /\x1d/g; // Target string to replace from the code
+	var replacement = ']'; // Replacement for the target string
+	var Stx = "\x87";  // x8D
 	
-	//use "i" instead of "g" for case-insensitive match
-	var regexp = new RegExp(sequenceToReplace, "g"); 
-	
-	function onResult(result, output) {
-	   if (!result.success) {
-	       output.setMessage(NoReadMessage);
-	       return;
-	   }
-	   GoodReadMessage = "";
-	   result.codes.forEach(function(code) {
-	       GoodReadMessage += code.content.replace(regexp, replaceWith);
-	   }); 
-	   
-	   output.setMessage("*"+(GoodReadMessage ? GoodReadMessage : NoReadMessage)+"*");
+	if( results.codes.length > 0)
+	{// If a code was read..
+		codeContent = results.codes[0].content; // Store the code content
+		aimId = results.codes[0].aimId;
+		outputMessage = codeContent.replace(stringToReplace,replacement); // The output message is the new code
 	}
+	else
+	{// If the VL hasn't decoded any barcode --> NO READ message
+		outputMessage = "NO READ";
+	}
+	output.setMessage(Stx+aimId+outputMessage + "\r\n"); // Output the message
+}
